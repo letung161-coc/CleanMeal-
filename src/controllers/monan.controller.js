@@ -1,4 +1,3 @@
-const { sql, poolPromise } = require("../db");
 const monanService = require("../services/monan.service");
 
 /* ===== GET ALL ===== */
@@ -8,7 +7,7 @@ exports.getAllMonAn = async (req, res) => {
     const data = await monanService.getAll({ page, limit });
     res.json(data);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(err.status || 500).json({ message: err.message });
   }
 };
 
@@ -16,63 +15,30 @@ exports.getAllMonAn = async (req, res) => {
 exports.getByLoaiAmThuc = async (req, res) => {
   try {
     const amThucId = parseInt(req.params.amThucId, 10);
-    const pool = await poolPromise;
-
-    const rs = await pool
-      .request()
-      .input("AmThucID", sql.Int, amThucId)
-      .query(`
-        SELECT m.*
-        FROM MonAn m
-        JOIN MonAn_LoaiAmThuc ml ON m.MaMon = ml.MaMon
-        WHERE ml.AmThucID = @AmThucID
-      `);
-
-    res.json(rs.recordset);
+    const data = await monanService.getByLoaiAmThuc(amThucId);
+    res.json(data);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(err.status || 500).json({ message: err.message });
   }
 };
 
 exports.getByCheDoAn = async (req, res) => {
   try {
     const cheDoId = parseInt(req.params.cheDoId, 10);
-    const pool = await poolPromise;
-
-    const rs = await pool
-      .request()
-      .input("CheDoID", sql.Int, cheDoId)
-      .query(`
-        SELECT m.*
-        FROM MonAn m
-        JOIN MonAn_CheDoAn mc ON m.MaMon = mc.MaMon
-        WHERE mc.CheDoID = @CheDoID
-      `);
-
-    res.json(rs.recordset);
+    const data = await monanService.getByCheDoAn(cheDoId);
+    res.json(data);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(err.status || 500).json({ message: err.message });
   }
 };
 
 exports.getByLoaiBuaAn = async (req, res) => {
   try {
     const buaAnId = parseInt(req.params.buaAnId, 10);
-    const pool = await poolPromise;
-
-    const rs = await pool
-      .request()
-      .input("BuaAnID", sql.Int, buaAnId)
-      .query(`
-        SELECT m.*
-        FROM MonAn m
-        JOIN MonAn_BuaAn mb ON m.MaMon = mb.MaMon
-        WHERE mb.BuaAnID = @BuaAnID
-      `);
-
-    res.json(rs.recordset);
+    const data = await monanService.getByLoaiBuaAn(buaAnId);
+    res.json(data);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(err.status || 500).json({ message: err.message });
   }
 };
 

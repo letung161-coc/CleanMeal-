@@ -20,8 +20,8 @@
   - Tạo/list/update tên/xoá/find
 - **`src/models/thucdon-monan.repository.js`** ↔ `ThucDon_MonAn` (+ join `MonAn`)
   - Thêm/xoá món trong thực đơn, xem chi tiết theo ngày
-- **`src/models/nguyenlieu.repository.js`** ↔ `NhomNguyenLieu`, `NguyenLieu`
-  - CRUD nhóm, CRUD nguyên liệu, list theo nhóm
+- **`src/models/nguyenlieu.repository.js`** ↔ `NhomNguyenLieu`, `NguyenLieu`, `MonAn_NguyenLieu`
+  - CRUD nhóm, CRUD nguyên liệu, list theo nhóm, list/merge nguyên liệu theo món
 - **`src/models/buocnau.repository.js`** ↔ `BuocNau`
   - CRUD bước nấu, list theo món
 - **`src/models/phanloai.repository.js`** ↔ `LoaiAmThuc`, `CheDoAn`, `LoaiBuaAn`

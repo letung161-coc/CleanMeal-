@@ -91,4 +91,35 @@ exports.delete = async (maNguyenLieu) => {
     .query("DELETE FROM NguyenLieu WHERE MaNguyenLieu=@MaNguyenLieu");
 };
 
+// ===== MonAn_NguyenLieu =====
+exports.listByMon = async (maMon) => {
+  const pool = await poolPromise;
+  const rs = await pool
+    .request()
+    .input("MaMon", sql.Int, maMon)
+    .query(`
+      SELECT nl.MaNguyenLieu, nl.TenNguyenLieu, mnl.SoLuong, nl.DonViTinh, nl.CaloTrenDonVi
+      FROM MonAn_NguyenLieu mnl
+      JOIN NguyenLieu nl ON mnl.MaNguyenLieu = nl.MaNguyenLieu
+      WHERE mnl.MaMon = @MaMon
+    `);
+  return rs.recordset;
+};
+
+exports.addOrUpdateForMon = async ({ maMon, maNguyenLieu, soLuong }) => {
+  const pool = await poolPromise;
+  await pool
+    .request()
+    .input("MaMon", sql.Int, maMon)
+    .input("MaNguyenLieu", sql.Int, maNguyenLieu)
+    .input("SoLuong", sql.Float, soLuong)
+    .query(`
+      MERGE MonAn_NguyenLieu AS target
+      USING (SELECT @MaMon AS MaMon, @MaNguyenLieu AS MaNguyenLieu) AS src
+      ON target.MaMon = src.MaMon AND target.MaNguyenLieu = src.MaNguyenLieu
+      WHEN MATCHED THEN UPDATE SET SoLuong=@SoLuong
+      WHEN NOT MATCHED THEN INSERT (MaMon, MaNguyenLieu, SoLuong) VALUES (@MaMon, @MaNguyenLieu, @SoLuong);
+    `);
+};
+
 

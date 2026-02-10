@@ -64,4 +64,43 @@ exports.remove = async (maMon) => {
     .query("DELETE FROM MonAn WHERE MaMon=@MaMon");
 };
 
+exports.findByAmThucId = async (amThucId) => {
+  const pool = await poolPromise;
+  const rs = await pool
+    .request()
+    .input("AmThucID", sql.Int, amThucId)
+    .query(`
+      SELECT m.* FROM MonAn m
+      JOIN MonAn_LoaiAmThuc ml ON m.MaMon = ml.MaMon
+      WHERE ml.AmThucID = @AmThucID
+    `);
+  return rs.recordset;
+};
+
+exports.findByCheDoId = async (cheDoId) => {
+  const pool = await poolPromise;
+  const rs = await pool
+    .request()
+    .input("CheDoID", sql.Int, cheDoId)
+    .query(`
+      SELECT m.* FROM MonAn m
+      JOIN MonAn_CheDoAn mc ON m.MaMon = mc.MaMon
+      WHERE mc.CheDoID = @CheDoID
+    `);
+  return rs.recordset;
+};
+
+exports.findByBuaAnId = async (buaAnId) => {
+  const pool = await poolPromise;
+  const rs = await pool
+    .request()
+    .input("BuaAnID", sql.Int, buaAnId)
+    .query(`
+      SELECT m.* FROM MonAn m
+      JOIN MonAn_BuaAn mb ON m.MaMon = mb.MaMon
+      WHERE mb.BuaAnID = @BuaAnID
+    `);
+  return rs.recordset;
+};
+
 

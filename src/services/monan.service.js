@@ -1,5 +1,8 @@
 const { sql, poolPromise } = require("../db");
 const monanRepo = require("../models/monan.repository");
+const nguyenlieuRepo = require("../models/nguyenlieu.repository");
+const buocnauRepo = require("../models/buocnau.repository");
+const lichsuRepo = require("../models/lichsu.repository");
 
 exports.getAll = async ({ page = 1, limit = 10 }) => {
   const pageNum = Number(page) > 0 ? Number(page) : 1;
@@ -43,27 +46,15 @@ exports.getByIdWithDetail = async (maMon) => {
     throw err;
   }
 
-  const nguyenLieu = await pool
-    .request()
-    .input("MaMon", sql.Int, maMon)
-    .query(`
-      SELECT nl.MaNguyenLieu, nl.TenNguyenLieu, mnl.SoLuong, nl.DonViTinh, nl.CaloTrenDonVi
-      FROM MonAn_NguyenLieu mnl
-      JOIN NguyenLieu nl ON mnl.MaNguyenLieu = nl.MaNguyenLieu
-      WHERE mnl.MaMon = @MaMon
-    `);
-
-  const buocNau = await pool
-    .request()
-    .input("MaMon", sql.Int, maMon)
-    .query(
-      "SELECT * FROM BuocNau WHERE MaMon = @MaMon ORDER BY SoThuTuBuoc ASC",
-    );
+  const [nguyenLieu, buocNau] = await Promise.all([
+    nguyenlieuRepo.listByMon(maMon),
+    buocnauRepo.listByMon(maMon),
+  ]);
 
   return {
     ...monAn,
-    NguyenLieu: nguyenLieu.recordset,
-    BuocNau: buocNau.recordset,
+    NguyenLieu: nguyenLieu,
+    BuocNau: buocNau,
   };
 };
 
@@ -77,13 +68,7 @@ exports.search = async ({ q, userId }) => {
   const pool = await poolPromise;
 
   if (userId) {
-    await pool
-      .request()
-      .input("UserID", sql.Int, userId)
-      .input("TuKhoa", sql.NVarChar(100), q)
-      .query(
-        "INSERT INTO LichSuTimKiem(UserID, TuKhoa, ThoiGian) VALUES(@UserID, @TuKhoa, GETDATE())",
-      );
+    await lichsuRepo.insert({ userId, tuKhoa: q });
   }
 
   const rs = await pool
@@ -113,5 +98,14 @@ exports.update = async (maMon, payload) => {
 exports.remove = async (maMon) => {
   await monanRepo.remove(maMon);
 };
+
+exports.getByLoaiAmThuc = async (amThucId) =>
+  monanRepo.findByAmThucId(amThucId);
+
+exports.getByCheDoAn = async (cheDoId) =>
+  monanRepo.findByCheDoId(cheDoId);
+
+exports.getByLoaiBuaAn = async (buaAnId) =>
+  monanRepo.findByBuaAnId(buaAnId);
 
 

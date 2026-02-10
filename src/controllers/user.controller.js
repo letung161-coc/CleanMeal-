@@ -1,21 +1,10 @@
-const { poolPromise } = require("../db");
+const userService = require("../services/user.service");
 
 exports.getMe = async (req, res) => {
   try {
-    const pool = await poolPromise;
-
-    const result = await pool.request().input("UserID", req.user.userId).query(`
-        SELECT UserID, HoTen, Email, VaiTro
-        FROM users
-        WHERE UserID=@UserID
-      `);
-
-    if (result.recordset.length === 0) {
-      return res.status(404).json({ message: "Không tìm thấy người dùng" });
-    }
-
-    res.json(result.recordset[0]);
+    const data = await userService.getMe(req.user.userId);
+    res.json(data);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(err.status || 500).json({ message: err.message });
   }
 };

@@ -28,6 +28,18 @@ app.use("/api", apiLimiter);
 
 app.use(express.json());
 
+// Health check (cho monitoring / deploy)
+app.get("/api/health", async (req, res) => {
+  try {
+    const { poolPromise } = require("./db");
+    const pool = await poolPromise;
+    await pool.request().query("SELECT 1");
+    res.json({ status: "ok", db: "connected" });
+  } catch (err) {
+    res.status(503).json({ status: "error", db: "disconnected" });
+  }
+});
+
 // Root route
 app.get("/", (req, res) => {
   res.json({

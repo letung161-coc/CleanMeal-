@@ -1,0 +1,173 @@
+*{
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+body{
+    margin: 0;
+}
+.login-body{
+    min-height: 100vh;
+    width: 100%;
+    background: url("https://img.freepik.com/premium-photo/healthy-food-background-autumn-fresh-vegetables-dark-stone-table-with-copy-space-top-view_127032-1954.jpg?w=2000");
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: gradientBG 30s ease infinite;
+    overflow: hidden;
+}
+.login-container {
+    width: 600px;
+    min-height: 70vh;
+    margin: 0;
+    padding: 20px;
+    background-color: rgba(255,255,255,0.1);
+    border-radius: 8px;
+    box-shadow: 0 25px 45px rgba(0,0,0,0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    backdrop-filter: blur(5px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    z-index: 10;
+    overflow: hidden;
+}
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+.login-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.05);
+    transform: skewX(-15deg);
+    transition: 0.5s;
+    pointer-events: none;
+}
+.login-container:hover::before {
+    left: 120%;
+}
+.login-container h1 {
+    color: #fff;
+    font-size: 40px;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 1px;
+    margin-bottom: 40px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.input-group {
+    position: relative;
+    margin-bottom: 30px;
+
+}
+.input-group input{
+    width: 100%;
+    padding: 12px 20px;
+    border: none;
+    background: rgba(255, 255, 255, 0.2);
+    outline: none;
+    border-radius: 30px;
+    font-size: 16px;
+    color: #fff;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+.input-group input::placeholder{
+    color:rgba(255, 255, 255, 0.7);
+}
+.input-group input:focus{
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+.input-group label{
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 16px;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+.input-group input:focus + label,
+.input-group input:valid + label{
+    top: 0;
+    left: 15px;
+    font-size: 12px;
+    color: #fff;
+    background: rgba(255,255,255,0.2);
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+.remember-forgot{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    color: #fff;
+    font-size: 14px;
+}
+.remember-forgot label{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.remember-forgot input{
+    margin-right: 8px;
+    width: 14px;
+    height: 14px;
+    accent-color: #a0d468;
+}
+.remember-forgot a{
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.remember-forgot a:hover{
+    color: #a0d468;
+    text-decoration: underline;
+}
+.login-btn{
+    width: 100%;
+    padding: 15px;
+    border: none;
+    background: rgba(255, 255, 255, 0.3);
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    border: none;
+    outline: none;
+}
+.login-btn:hover{
+    background: rgba(255, 255, 255, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+.register-link a{
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+.register-link {
+   text-align: center;
+   margin: 20px 0;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 16px;
+}
+.register-link a:hover{
+    color: #a0d468;
+    text-decoration: underline;
+}

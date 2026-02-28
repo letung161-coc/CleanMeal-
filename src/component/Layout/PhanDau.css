@@ -1,0 +1,144 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.header {
+  height: 70px;
+  background: #fff;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header_container {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.header-left img {
+  height: 42px;
+}
+
+.menu-icon {
+  font-size: 26px;
+  cursor: pointer;
+}
+.nav-list {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+}
+
+.nav-list a {
+  text-decoration: none;
+  font-weight: 600;
+  color: #222;
+}
+
+.nav-list a:hover {
+  color: #a0d468;
+}
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 998;
+}
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -320px;
+  width: 300px;
+  height: 100vh;
+  background: #fff;
+  padding: 24px;
+  transition: all 0.3s ease;
+  z-index: 999;
+}
+.sidebar.active {
+  left: 0;
+}
+.close-btn {
+  font-size: 28px;
+  cursor: pointer;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar-menu li {
+  padding: 12px 0;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sidebar-menu li:hover {
+  color: #a0d468;
+}
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.search-box {
+  display: flex;
+  align-items: center;
+  background: #f3f3f3;
+  padding: 8px 16px;
+  border-radius: 30px;
+  gap: 10px;
+  transition: box-shadow 0.3s ease;
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 200px;
+  font-size: 14px;
+}
+
+.search-icon {
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.search-box:hover {
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+.header-icons {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-size: 20px;
+}
+
+.header-icons svg {
+  cursor: pointer;
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+.header-icons svg:hover {
+  color: #a0d468;
+  transform: scale(1.15);
+}

@@ -25,7 +25,7 @@ export async function apiFetch(endpoint, options = {}) {
       ...defaultHeaders,
       ...options.headers,
     },
-    credentials: "include", // gửi kèm cookies khi cần
+    // Không dùng credentials: "include" vì auth dùng JWT trong header
   });
 
   if (!response.ok) {
@@ -79,6 +79,27 @@ export const authAPI = {
 };
 
 export const monanAPI = {
-  getAll: (params = "") => apiFetch(`/api/monan${params}`),
+  // Lấy tất cả món (hỗ trợ filter, search, limit)
+  // vd: getAll({ category: "salad", search: "chicken", limit: 10 })
+  getAll: (params = {}) => {
+    const qs = new URLSearchParams(params).toString();
+    return apiFetch(`/api/monan${qs ? "?" + qs : ""}`);
+  },
+
+  // Lấy chi tiết 1 món theo id
   getById: (id) => apiFetch(`/api/monan/${id}`),
+
+  // Lấy thông tin dinh dưỡng của món (macros + nutrition)
+  getNutrition: (id) => apiFetch(`/api/monan/${id}/nutrition`),
+
+  // Lấy công thức & cách làm của món
+  getRecipe: (id) => apiFetch(`/api/monan/${id}/recipe`),
+};
+
+export const categoriesAPI = {
+  // Lấy tất cả categories (kèm số lượng món ăn)
+  getAll: () => apiFetch("/api/categories"),
+
+  // Lấy các món ăn thuộc category slug
+  getBySlug: (slug) => apiFetch(`/api/categories/${slug}`),
 };

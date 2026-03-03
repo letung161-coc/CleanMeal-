@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { FaEye, FaHeart, FaPen, FaFire } from 'react-icons/fa';
+import { FaEye, FaHeart, FaPen } from 'react-icons/fa';
 import './Menu.css';
 import product6 from '../../img/product6.jpg';
 import product7 from '../../img/product7.jpg';
@@ -18,127 +18,21 @@ import imgProtein from '../../img/protein.jpg'
 import imgSnack from '../../img/snacks.webp'
 import imgMeal from '../../img/meal.jpg'
 import imgSandwich from '../../img/sandwich.jpg'
+import { dishes as allDishes } from '../../data/foodDatabase';
 const MenuSection = () => {
-  const dishes = [
-    {
-      id: 1,
-      name: "Chicken Breast Salad with Roasted Sesame Dressing",
-      image: product6,
-      decription: "Salad ức gà là món ăn nhẹ bụng – giàu protein – ít chất béo, rất thích hợp cho người giảm cân, ăn kiêng, tập gym. Thịt gà mềm, rau tươi giòn kết hợp với sốt mè rang béo nhẹ, thơm ngậy tạo cảm giác ngon miệng mà không ngán.",
-      nguyenlieu: "100–150g ức gà"
-    },
-    {
-      id: 2,
-      name: "Black bread + Fried egg + Butter",
-      image: product7,
-      decription: "Món ăn sáng đơn giản – nhanh gọn – đầy đủ dinh dưỡng. Bơ béo tự nhiên kết hợp với trứng ốp la thơm mềm và bánh mì đen giúp cung cấp năng lượng lâu dài, không gây tăng cân, rất phù hợp cho dân văn phòng, sinh viên, người tập thể thao.",
-      nguyenlieu: "1–2 quả trứng"
-    },
-    {
-      id: 3,
-      name: "Brown Rice + Pan-Seared Salmon + Boiled Vegetables",
-      image: product8,
-      decription: "Đây là combo chuẩn eat clean: tinh bột tốt từ gạo lứt + protein từ cá hồi + vitamin từ rau xanh. Món ăn giữ năng lượng bền lâu, hỗ trợ giảm mỡ, tăng cơ, đẹp da, rất phù hợp cho người ăn kiêng khoa học.",
-      nguyenlieu: "1 chén cơm gạo lứt"
-    },
-    {
-      id: 4,
-      name: "Lemon-Cucumber-Mint Detox Water",
-      image: product9,
-      decription: "Nước detox giúp thanh lọc cơ thể, đẹp da, hỗ trợ tiêu hóa, giảm cảm giác thèm ăn và giúp cơ thể nhẹ nhàng, sảng khoái.",
-      nguyenlieu: "1 chén cơm gạo lứt"
-    }
-  ];
-  const soupDishes = [
-    {
-      id: 5,
-      name: "Green Chile Chicken Soup",
-      image: one1,
-      tags: ["Chicken", "Dinner"],
-      macros: { cal: 340, carbs: "39g", fats: "6g", protein: "35g" }
-    },
-    {
-      id: 6,
-      name: "High Protein Roasted Veg Stew",
-      image: one1,
-      tags: ["Dinner", "Fall"],
-      macros: { cal: 350, carbs: "32g", fats: "17g", protein: "22g" }
-    },
-    {
-      id: 7,
-      name: "Delicious Split Red Lentil Soup",
-      image: one1,
-      tags: ["Gluten Free", "Meal Prep"],
-      macros: { cal: 250, carbs: "33g", fats: "8g", protein: "12g" }
-    },
-    {
-      id: 8,
-      name: "15 Minute Egg Drop Soup",
-      image: one1,
-      tags: ["Dinner", "Gluten Free"],
-      macros: { cal: 280, carbs: "17g", fats: "16g", protein: "20g" }
-    }
-  ];
-  const oneDishes = [
-    {
-      id: 9,
-      name: "Sheet Pan Salmon Niçoise Salad Recipe",
-      image: sup1,
-      tags: ["Chicken", "Dinner"],
-      macros: { cal: 340, carbs: "39g", fats: "6g", protein: "35g" }
-    },
-    {
-      id: 10,
-      name: "High Protein Roasted Veg StewSheet Pan Sriracha Chicken & Veggies Over Quinoa (Healthy Meal Prep)",
-      image: sup1,
-      tags: ["Dinner", "Fall"],
-      macros: { cal: 350, carbs: "32g", fats: "17g", protein: "22g" }
-    },
-    {
-      id: 11,
-      name: "Slow Cooker Black-Eyed Pea and Butterbean Soup with Chicken Andouille Sausage",
-      image: sup1,
-      tags: ["Gluten Free", "Meal Prep"],
-      macros: { cal: 250, carbs: "33g", fats: "8g", protein: "12g" }
-    },
-    {
-      id: 12,
-      name: "Grilled Chicken & Rice Soup with Warm Spices",
-      image: sup1,
-      tags: ["Dinner", "Gluten Free"],
-      macros: { cal: 280, carbs: "17g", fats: "16g", protein: "20g" }
-    }
-  ];
-  const dietDishes = [
-    {
-      id: 13,
-      name: "Sheet Pan Salmon Niçoise Salad Recipe",
-      image: diet1,
-      tags: ["Chicken", "Dinner"],
-      macros: { cal: 340, carbs: "39g", fats: "6g", protein: "35g" }
-    },
-    {
-      id: 14,
-      name: "High Protein Roasted Veg StewSheet Pan Sriracha Chicken & Veggies Over Quinoa (Healthy Meal Prep)",
-      image: diet1,
-      tags: ["Dinner", "Fall"],
-      macros: { cal: 350, carbs: "32g", fats: "17g", protein: "22g" }
-    },
-    {
-      id: 15,
-      name: "Slow Cooker Black-Eyed Pea and Butterbean Soup with Chicken Andouille Sausage",
-      image: diet1,
-      tags: ["Gluten Free", "Meal Prep"],
-      macros: { cal: 250, carbs: "33g", fats: "8g", protein: "12g" }
-    },
-    {
-      id: 16,
-      name: "Grilled Chicken & Rice Soup with Warm Spices",
-      image: diet1,
-      tags: ["Dinner", "Gluten Free"],
-      macros: { cal: 280, carbs: "17g", fats: "16g", protein: "20g" }
-    }
-  ];
+  // 4 featured dishes giữ ảnh local, data mở rộng từ database
+  const localImages = [product6, product7, product8, product9];
+  const dishes = allDishes.slice(0, 4).map((d, i) => ({
+    ...d,
+    image: localImages[i]
+  }));
+  // Sections lấy từ database theo category
+  const soupDishes = allDishes.filter(d => d.tags.includes("Chicken") || d.category === "Soup")
+    .slice(0, 4).map(d => ({ ...d, image: one1 }));
+  const oneDishes = allDishes.filter(d => d.tags.includes("Meal Prep"))
+    .slice(0, 4).map(d => ({ ...d, image: sup1 }));
+  const dietDishes = allDishes.filter(d => d.tags.includes("Vegetarian") || d.tags.includes("Gluten Free"))
+    .slice(0, 4).map(d => ({ ...d, image: diet1 }));
   const categories = [
     {
       id: 1,
@@ -190,7 +84,8 @@ const MenuSection = () => {
     },
   ];
   useEffect(() => {
-    localStorage.setItem('dishes', JSON.stringify(dishes));
+    // Lưu toàn bộ database vào localStorage để Product.js & AllProduct.js dùng
+    localStorage.setItem('dishes', JSON.stringify(allDishes));
   }, []);
   return (
     <>

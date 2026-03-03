@@ -1,0 +1,337 @@
+/* ============================================================
+   CleanMeal Design System v2
+   Inspired by AllRecipes.com & MyRecipes.com
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800&display=swap');
+
+/* ── CSS Variables ────────────────────────────────────────── */
+:root {
+  /* Brand colors - Pastel Healthy Lifestyle */
+  --color-primary: #81c784;       /* Pastel Green */
+  --color-primary-dark: #66bb6a;
+  --color-primary-light: #a5d6a7;
+  --color-accent: #ffb74d;        /* Soft Orange/Beige accent */
+  --color-accent-dark: #ffa726;
+  --color-accent-light: #ffcc80;
+
+  /* Neutrals */
+  --color-white: #ffffff;
+  --color-bg: #faf9f6;            /* Off-white/Beige */
+  --color-bg-warm: #f5f5dc;       /* Beige */
+  --color-surface: #ffffff;
+  --color-border: #e6e8e6;
+  --color-border-light: #f4f5f4;
+  --color-text-primary: #2e3b32;  /* Dark green tinted text */
+  --color-text-secondary: #5e6c62;
+  --color-text-muted: #8b95a5;
+  --color-text-inverse: #ffffff;
+
+  /* Status */
+  --color-success: #16a34a;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-star: #f59e0b;
+
+  /* Typography */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+
+  /* Font sizes */
+  --text-xs: 0.75rem;
+  --text-sm: 0.8125rem;
+  --text-base: 0.9375rem;
+  --text-md: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 2rem;
+  --text-4xl: 2.5rem;
+  --text-5xl: 3.25rem;
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+
+  /* Radius - Large rounded corners */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-full: 9999px;
+
+  /* Shadows - Soft shadows */
+  --shadow-sm: 0 2px 8px rgba(46, 59, 50, 0.04);
+  --shadow-md: 0 8px 24px rgba(46, 59, 50, 0.06);
+  --shadow-lg: 0 12px 32px rgba(46, 59, 50, 0.08);
+  --shadow-xl: 0 20px 48px rgba(46, 59, 50, 0.1);
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Layout */
+  --header-height: 72px;
+  --nav-height: 48px;
+  --container-max: 1280px;
+  --sidebar-width: 260px;
+}
+
+/* ── Global Reset ──────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  color: var(--color-text-primary);
+  background: var(--color-bg);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+  border: none;
+  background: none;
+  font-size: inherit;
+}
+
+ul, ol { list-style: none; }
+
+/* ── Container ─────────────────────────────────────────── */
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+/* ── Typography ────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--color-text-primary);
+}
+
+.heading-serif {
+  font-family: var(--font-serif);
+}
+
+/* ── Buttons ───────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: 10px 24px;
+  font-weight: 600;
+  font-size: var(--text-sm);
+  border-radius: var(--radius-full);
+  transition: all var(--transition-base);
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: var(--color-text-inverse);
+}
+.btn-primary:hover {
+  background: var(--color-primary-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-accent {
+  background: var(--color-accent);
+  color: var(--color-text-inverse);
+}
+.btn-accent:hover {
+  background: var(--color-accent-dark);
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  border: 1.5px solid var(--color-border);
+  color: var(--color-text-primary);
+  background: var(--color-white);
+}
+.btn-outline:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.btn-ghost {
+  color: var(--color-text-secondary);
+}
+.btn-ghost:hover {
+  color: var(--color-primary);
+  background: rgba(46,125,50,0.06);
+}
+
+/* ── Tags / Badges ─────────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.3px;
+}
+.badge-green { background: #dcfce7; color: #166534; }
+.badge-orange { background: #fff7ed; color: #9a3412; }
+.badge-blue { background: #dbeafe; color: #1e40af; }
+.badge-purple { background: #ede9fe; color: #5b21b6; }
+
+/* ── Stars / Rating ────────────────────────────────────── */
+.stars {
+  display: inline-flex;
+  gap: 2px;
+  color: var(--color-star);
+  font-size: 14px;
+}
+.stars .empty { color: #ddd; }
+
+/* ── Skeleton ──────────────────────────────────────────── */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-sm);
+}
+
+/* ── Scrollbar ─────────────────────────────────────────── */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: #c8cdd3;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover { background: #9ca3af; }
+
+/* ── Animations ────────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(46, 125, 50, 0.4); }
+  50% { box-shadow: 0 0 0 10px rgba(46, 125, 50, 0); }
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.fade-in {
+  animation: fadeIn 0.4s ease-out;
+}
+
+/* Skeleton shimmer loading */
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: var(--radius-md);
+}
+
+/* Pulse glow for badges and highlights */
+.pulse-glow {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+/* Card hover lift premium */
+.card-lift {
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
+}
+.card-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+}
+
+/* Smooth image zoom on hover */
+.img-zoom {
+  overflow: hidden;
+}
+.img-zoom img {
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.img-zoom:hover img {
+  transform: scale(1.08);
+}
+
+/* Floating animation for decorative elements */
+.float-anim {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Glassmorphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+/* Page enter animation */
+.page-enter {
+  animation: slideUp 0.5s ease-out;
+}
+
+/* Scale-in animation for modals */
+.scale-enter {
+  animation: scaleIn 0.3s ease-out;
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}

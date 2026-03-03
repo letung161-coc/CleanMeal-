@@ -1,0 +1,154 @@
+/* ============================================================
+   AllRecipes Page v2 – Search/Filter Layout
+   ============================================================ */
+
+.recipes-page-v2 {
+  min-height: 100vh;
+}
+
+/* Hero */
+.rcp-hero-v2 {
+  background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary));
+  padding: var(--space-2xl) 0 var(--space-xl);
+  text-align: center;
+  color: white;
+}
+.rcp-hero-v2 h1 {
+  font-size: var(--text-3xl);
+  color: white;
+  margin-bottom: var(--space-sm);
+}
+.rcp-hero-v2 p {
+  color: rgba(255,255,255,0.7);
+  margin-bottom: var(--space-lg);
+}
+.rcp-search-form {
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+}
+.rcp-search-icon-v2 {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+}
+.rcp-search-input-v2 {
+  width: 100%;
+  padding: 14px 20px 14px 48px;
+  border: none;
+  border-radius: var(--radius-full);
+  font-size: var(--text-base);
+  font-family: var(--font-sans);
+  box-shadow: var(--shadow-lg);
+}
+.rcp-search-input-v2:focus {
+  outline: none;
+  box-shadow: var(--shadow-xl), 0 0 0 3px rgba(255,255,255,0.3);
+}
+
+/* Content layout */
+.rcp-content-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: var(--space-xl);
+  padding: var(--space-xl) 0;
+}
+
+/* Sidebar */
+.rcp-sidebar {
+  position: sticky;
+  top: calc(var(--header-height) + var(--nav-height) + 16px);
+  height: fit-content;
+}
+.rcp-filter-group {
+  margin-bottom: var(--space-xl);
+}
+.rcp-filter-group h3 {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--color-border);
+}
+.rcp-filter-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+.rcp-filter-item:hover {
+  background: var(--color-bg);
+}
+
+/* Sort bar */
+.rcp-sort-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) 0;
+  margin-bottom: var(--space-md);
+  border-bottom: 1px solid var(--color-border);
+}
+.rcp-result-text {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+.rcp-sort-options {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+.rcp-sort-btn {
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  transition: all var(--transition-fast);
+}
+.rcp-sort-btn:hover { background: var(--color-bg); }
+.rcp-sort-btn.active {
+  background: var(--color-primary);
+  color: white;
+}
+
+/* Grid */
+.recipe-grid-v2 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+
+/* Error & Empty */
+.rcp-error-v2, .rcp-empty-v2 {
+  text-align: center;
+  padding: var(--space-3xl) var(--space-lg);
+}
+.rcp-error-v2 p { color: var(--color-error); margin-bottom: var(--space-md); }
+.rcp-empty-v2 h3 { margin: var(--space-md) 0 var(--space-sm); }
+.rcp-empty-v2 p { color: var(--color-text-muted); }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .recipe-grid-v2 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .rcp-content-layout { grid-template-columns: 1fr; }
+  .rcp-sidebar { display: none; }
+  .recipe-grid-v2 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .recipe-grid-v2 { grid-template-columns: 1fr; }
+}

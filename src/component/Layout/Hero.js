@@ -46,7 +46,7 @@ const FoodSlider = () => {
         <div className="content-col">
           <h1 className="food-title">{currentFood.title}</h1>
           <p className="food-desc">{currentFood.desc}</p>
-          <NavLink to={"./login"}>
+          <NavLink to={"/recipes"}>
             <button className="order-btn">Xem Chi Tiết</button>
           </NavLink>
 
